@@ -3,12 +3,21 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.views import APIView
 
 from .models import Review, Book
 from .serializers import ReviewSerializer, BookSerializer
 from . import serializers
 from . import models
 
+
+class HomeView(APIView):
+    
+    def get(self, request):
+        data = {
+            "message": "Welcome to the book viewer!",
+        }
+        return Response(data)
 
 @api_view(['GET', 'POST'])
 def reviews(request):
